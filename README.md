@@ -2,7 +2,7 @@
 **Desafío 35:** Baja capacidad de respuesta ante reclamos ciudadanos.
 
 **Ramo:** Ingeniería Web y Móvil  
-**Entrega:** Parcial 1
+**Entrega:** Parcial 1  
 **Profesora:** Sandra Cano
 
 ### Equipo de Trabajo
