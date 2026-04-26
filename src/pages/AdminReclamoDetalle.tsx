@@ -109,7 +109,7 @@ const AdminReclamoDetalle: React.FC = () => {
                 
                 <div style={{ padding: '20px' }}>
                   <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#333', marginBottom: '5px' }}>Estado Actual</div>
-                  <IonItem fill="outline" style={{ '--border-radius': '4px', '--min-height': '40px', marginBottom: '20px' }}>
+                  <IonItem style={{ '--border-radius': '4px', '--min-height': '40px', marginBottom: '20px' }}>
                     <IonSelect value="revision" interface="popover" style={{ width: '100%' }}>
                       <IonSelectOption value="nuevo">Nuevo</IonSelectOption>
                       <IonSelectOption value="revision">En Revisión</IonSelectOption>
@@ -119,7 +119,7 @@ const AdminReclamoDetalle: React.FC = () => {
                   </IonItem>
 
                   <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#333', marginBottom: '5px' }}>Derivar a Unidad Técnica</div>
-                  <IonItem fill="outline" style={{ '--border-radius': '4px', '--min-height': '40px', marginBottom: '20px' }}>
+                  <IonItem style={{ '--border-radius': '4px', '--min-height': '40px', marginBottom: '20px' }}>
                     <IonSelect placeholder="Seleccione unidad..." interface="popover" style={{ width: '100%' }}>
                       <IonSelectOption value="vialidad">Vialidad</IonSelectOption>
                       <IonSelectOption value="aseo">Aseo y Ornato</IonSelectOption>
