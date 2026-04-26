@@ -26,7 +26,7 @@ const Login: React.FC = () => {
             {/* Formulario */}
             <div className="ion-margin-top">
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>RUT</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={idCardOutline} color="medium" />
                 <IonInput placeholder="12.345.678-9" type="text" />
               </IonItem>
@@ -35,7 +35,7 @@ const Login: React.FC = () => {
                 <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Contraseña</IonLabel>
                 <a href="#" style={{ fontSize: '12px', color: '#002855', textDecoration: 'none', fontWeight: 'bold' }}>¿Olvidaste tu contraseña?</a>
               </div>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={lockClosedOutline} color="medium" />
                 <IonInput placeholder="........" type="password" />
                 <IonIcon slot="end" icon={eyeOffOutline} color="medium" style={{ cursor: 'pointer' }} />

@@ -20,19 +20,19 @@ const Registro: React.FC = () => {
             <IonCard style={{ padding: '30px 20px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', margin: 0 }}>
               
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Nombre Completo</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={personOutline} color="medium" />
                 <IonInput placeholder="Ej. Juan Pérez" type="text" />
               </IonItem>
 
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>RUT</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={idCardOutline} color="medium" />
                 <IonInput placeholder="12.345.678-9" type="text" />
               </IonItem>
 
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Correo Electrónico</IonLabel>
-              <IonItem fill="outline" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px', '--border-color': '#002855' }}>
+              <IonItem style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px', '--border-color': '#002855' }}>
                 <IonIcon slot="start" icon={mailOutline} color="medium" />
                 <IonInput placeholder="usuario@valido.com" type="email" value="usuario@valido.com" />
                 <IonIcon slot="end" icon={checkmarkCircle} style={{ color: '#002855' }} />
@@ -43,14 +43,14 @@ const Registro: React.FC = () => {
                 <IonRow>
                   <IonCol size="6" style={{ paddingLeft: 0, paddingRight: '5px' }}>
                     <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Región</IonLabel>
-                    <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+                    <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                       <IonIcon slot="start" icon={mapOutline} color="medium" />
                       <IonInput placeholder="Seleccione" readonly />
                     </IonItem>
                   </IonCol>
                   <IonCol size="6" style={{ paddingLeft: '5px', paddingRight: 0 }}>
                     <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Comuna</IonLabel>
-                    <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+                    <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                       <IonIcon slot="start" icon={businessOutline} color="medium" />
                       <IonInput placeholder="Seleccione" readonly />
                     </IonItem>
@@ -59,14 +59,14 @@ const Registro: React.FC = () => {
               </IonGrid>
 
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Contraseña</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={lockClosedOutline} color="medium" />
                 <IonInput placeholder="........" type="password" />
                 <IonIcon slot="end" icon={eyeOffOutline} color="medium" style={{ cursor: 'pointer' }} />
               </IonItem>
 
               <IonLabel style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>Confirmar Contraseña</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
+              <IonItem className="ion-margin-bottom" style={{ '--border-radius': '4px', '--min-height': '45px', marginTop: '5px' }}>
                 <IonIcon slot="start" icon={syncOutline} color="medium" />
                 <IonInput placeholder="........" type="password" />
               </IonItem>
