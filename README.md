@@ -13,7 +13,7 @@
 ---
 
 ## Enlaces Importantes
-**Aplicación Navegable (Vercel):** [reclamos-muni-git-master-xmrmatys-projects.vercel.app]
+**Aplicación Navegable (Vercel):**(https://reclamos-muni-git-master-xmrmatys-projects.vercel.app)
 
 ---
 
