@@ -51,7 +51,7 @@ El problema central radica en la pérdida de trazabilidad y la falta de comunica
 ## EP 1.3: Bocetos de UI/UX (Figma)
 El detalle completo de las interfaces y pantallas diseñadas para este proyecto se encuentra en la siguiente carpeta:
 
-[Ver galería de Mockups completa](./mockups/)
+[Ver galería de Mockups completa](./Mockups/)
 ---
 
 ## EP 1.4: Arquitectura de Navegación y Experiencia del Usuario
