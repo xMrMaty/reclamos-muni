@@ -3,7 +3,6 @@
 
 **Ramo:** Ingeniería Web y Móvil  
 **Entrega:** Parcial 1
-
 **Profesora:** Sandra Cano
 
 ### Equipo de Trabajo
