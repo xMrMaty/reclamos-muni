@@ -1,10 +1,15 @@
 import React from 'react';
 import { IonPage, IonHeader, IonToolbar, IonContent, IonSplitPane, IonMenu, IonList, IonItem, IonIcon, IonLabel, IonButton, IonGrid, IonRow, IonCol, IonCard, IonCardContent, IonBadge, IonAvatar } from '@ionic/react';
 import { gridOutline, listOutline, barChartOutline, logOutOutline, notificationsOutline, downloadOutline, warningOutline, checkmarkCircleOutline, timeOutline, folderOpenOutline } from 'ionicons/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const AdminDashboard: React.FC = () => {
   const history = useHistory();
+  const location = useLocation(); // Lee la URL actual
+
+  // Detectores de ruta (serán true o false)
+  const isDashboard = location.pathname === '/admin/dashboard';
+  const isGestion = location.pathname.includes('/admin/reclamo');
 
   return (
     <IonSplitPane contentId="main-content" style={{ '--side-width': '250px' }}>
@@ -27,14 +32,27 @@ const AdminDashboard: React.FC = () => {
         </IonHeader>
         <IonContent>
           <IonList lines="none">
-            <IonItem button style={{ '--background': '#f4f6f8', borderLeft: '4px solid #002855', fontWeight: 'bold', color: '#002855' }}>
-              <IonIcon slot="start" icon={gridOutline} color="primary" />
-              <IonLabel>Panel de Control</IonLabel>
+            {/* Botón Panel de Control */}
+            <IonItem 
+              button 
+              onClick={() => history.push('/admin/dashboard')}
+              style={isDashboard ? { '--background': '#f4f6f8', borderLeft: '4px solid #002855', fontWeight: 'bold', color: '#002855' } : {}}
+            >
+              <IonIcon slot="start" icon={gridOutline} color={isDashboard ? "primary" : "medium"} />
+              <IonLabel color={isDashboard ? "" : "medium"}>Panel de Control</IonLabel>
             </IonItem>
-            <IonItem button onClick={() => history.push('/admin/reclamo/1')}>
-              <IonIcon slot="start" icon={listOutline} color="medium" />
-              <IonLabel color="medium">Gestión de Reclamos</IonLabel>
+
+            {/* Botón Gestión de Reclamos */}
+            <IonItem 
+              button 
+              onClick={() => history.push('/admin/reclamo/1')}
+              style={isGestion ? { '--background': '#f4f6f8', borderLeft: '4px solid #002855', fontWeight: 'bold', color: '#002855' } : {}}
+            >
+              <IonIcon slot="start" icon={listOutline} color={isGestion ? "primary" : "medium"} />
+              <IonLabel color={isGestion ? "" : "medium"}>Gestión de Reclamos</IonLabel>
             </IonItem>
+
+            {/* Botón Reportes (Inactivo visualmente) */}
             <IonItem button>
               <IonIcon slot="start" icon={barChartOutline} color="medium" />
               <IonLabel color="medium">Reportes</IonLabel>

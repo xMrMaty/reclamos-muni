@@ -3,12 +3,13 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Route, Redirect } from 'react-router-dom';
 
 /* Vistas */
+import Registro from './pages/Registro';
 import AdminReclamoDetalle from './pages/AdminReclamoDetalle';
 import Login from './pages/Login';
 import NuevoReclamo from './pages/NuevoReclamo';
 import AdminDashboard from './pages/AdminDashboard';
 import ProtectedRoute from './routes/ProtectedRoute';
-import Registro from './pages/Registro';
+
 
 /* Core CSS de Ionic */
 import '@ionic/react/css/core.css';
@@ -30,6 +31,7 @@ const App: React.FC = () => (
       <IonRouterOutlet>
         <ProtectedRoute exact path="/admin/reclamo/:id" component={AdminReclamoDetalle} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/registro" component={Registro} />
         
         {/* Rutas Protegidas */}
         <ProtectedRoute exact path="/nuevo-reclamo" component={NuevoReclamo} />
@@ -37,7 +39,6 @@ const App: React.FC = () => (
         
         <Route exact path="/">
           <Redirect to="/login" />
-          <Route exact path="/registro" component={Registro} />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
