@@ -49,9 +49,10 @@ El problema central radica en la pérdida de trazabilidad y la falta de comunica
 ---
 
 ## EP 1.3: Bocetos de UI/UX (Figma)
-El detalle completo de las interfaces y pantallas diseñadas para este proyecto se encuentra en la siguiente carpeta:
-**[Prototipo Interactivo en Figma]([AQUÍ_PEGA_TU_LINK_DE_FIGMA](https://www.figma.com/site/pVRB6Pgecmp1NI24buVUMO/Sin-t%C3%ADtulo?node-id=0-1&t=2b5F6gvnvTXaL0Zb-1))** (Haz clic para navegar la aplicación)
-**[Galería de Mockups Estáticos](./Mockups/)** (Explora las capturas de pantalla en el repositorio)
+
+El detalle completo de las interfaces y pantallas diseñadas para este proyecto se encuentra en los siguientes enlaces:
+* [cite_start][Prototipo Interactivo en Figma](https://www.figma.com/site/pVRB6Pgecmp1NI24buVUMO/Sin-t%C3%ADtulo?node-id=0-1&t=2b5F6gvnvTXaL0Zb-1) (Haz clic para navegar la aplicación)
+* [cite_start][Galería de Mockups Estáticos](./Mockups/) (Explora las capturas de pantalla en el repositorio)
 ---
 
 ## EP 1.4: Arquitectura de Navegación y Experiencia del Usuario
