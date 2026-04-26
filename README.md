@@ -17,7 +17,7 @@
 
 ---
 
-##EP 1.1: Requerimientos Funcionales y No Funcionales
+## EP 1.1: Requerimientos Funcionales y No Funcionales
 
 Para esta aplicación, definimos dos roles principales: **Ciudadano** (quien ingresa y consulta) y **Funcionario OIRS** (administrador que clasifica, deriva y responde).
 
@@ -37,7 +37,7 @@ Para esta aplicación, definimos dos roles principales: **Ciudadano** (quien ing
 
 ---
 
-##EP 1.2: Justificación del problema y análisis del usuario objetivo
+## EP 1.2: Justificación del problema y análisis del usuario objetivo
 
 ### Justificación
 El problema central radica en la pérdida de trazabilidad y la falta de comunicación proactiva. Cuando un ciudadano ingresa un reclamo, la normativa exige una respuesta en un plazo máximo de 20 días corridos, con una extensión posible de 10 días. La frustración ciudadana no siempre nace de la falta de solución, sino de la "caja negra" institucional: el vecino no sabe si su requerimiento fue leído, si está siendo evaluado por una unidad técnica, o si fue olvidado. Digitalizar y transparentar el estado del trámite mitiga esta incertidumbre.
@@ -50,8 +50,8 @@ El problema central radica en la pérdida de trazabilidad y la falta de comunica
 
 ## EP 1.3: Bocetos de UI/UX (Figma)
 El detalle completo de las interfaces y pantallas diseñadas para este proyecto se encuentra en la siguiente carpeta:
-
-[Ver galería de Mockups completa](./Mockups/)
+**[Prototipo Interactivo en Figma]([AQUÍ_PEGA_TU_LINK_DE_FIGMA](https://www.figma.com/site/pVRB6Pgecmp1NI24buVUMO/Sin-t%C3%ADtulo?node-id=0-1&t=2b5F6gvnvTXaL0Zb-1))** (Haz clic para navegar la aplicación)
+**[Galería de Mockups Estáticos](./Mockups/)** (Explora las capturas de pantalla en el repositorio)
 ---
 
 ## EP 1.4: Arquitectura de Navegación y Experiencia del Usuario
