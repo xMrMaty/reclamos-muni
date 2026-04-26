@@ -1,7 +1,7 @@
 # Proyecto: Santo Domingo Digital
 **Desafío 35:** Baja capacidad de respuesta ante reclamos ciudadanos.
 
-**Asignatura:** Ingeniería Web y Móvil  
+**Ramo:** Ingeniería Web y Móvil  
 **Entrega:** Parcial 1  
 
 ### Equipo de Trabajo
