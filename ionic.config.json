@@ -1,7 +1,0 @@
-{
-  "name": "reclamos-muni",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react-vite"
-}
