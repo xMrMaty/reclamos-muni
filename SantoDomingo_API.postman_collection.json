@@ -69,7 +69,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"rut\": \"11.111.111-1\",\n  \"password\": \"Admin1234!\"\n}"
+              "raw": "{\n  \"rut\": \"11.111.111-1\",\n  \"contrasena\": \"Admin1234!\"\n}"
             }
           },
           "event": [{
@@ -136,7 +136,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"titulo\": \"Bache peligroso en Av. Principal\",\n  \"descripcion\": \"Existe un bache muy profundo que ha causado daños a varios vehículos durante la última semana.\",\n  \"direccion\": \"Av. Principal con Calle Los Pinos\",\n  \"categoria_id\": 2\n}"
+              "raw": "{\n  \"numero_folio\": \"FOLIO-2026-001\",\n  \"titulo\": \"Bache peligroso en Av. Principal\",\n  \"descripcion\": \"Existe un bache muy profundo que ha causado daños a varios vehículos durante la última semana.\",\n  \"direccion\": \"Av. Principal con Calle Los Pinos\",\n  \"categoria_id\": 2,\n  \"usuario_id\": 2\n}"
             }
           }
         },
