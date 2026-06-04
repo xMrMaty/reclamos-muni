@@ -1,78 +1,182 @@
-# Proyecto: Santo Domingo Digital
+# Proyecto: Santo Domingo Digital — Entrega Parcial 2
 **Desafío 35:** Baja capacidad de respuesta ante reclamos ciudadanos.
 
 **Ramo:** Ingeniería Web y Móvil  
 **Entrega:** Parcial 1  
 **Profesora:** Sandra Cano
 
-### Equipo de Trabajo
-* Matias Ruiz
-* Joaquin Castro
-* Alvaro Del Pino
-  
----
+## 1. Información del Proyecto
 
-## Enlaces Importantes
-* **Aplicación Navegable (Vercel):** [Acceder a la Demo](https://reclamos-muni.vercel.app)
-* **Repositorio de Código:** [GitHub](https://github.com/xMrMaty/reclamos-muni)
-
----
-
-## EP 1.1: Requerimientos Funcionales y No Funcionales
-
-Para esta aplicación, definimos dos roles principales: **Ciudadano** (quien ingresa y consulta) y **Funcionario OIRS** (administrador que clasifica, deriva y responde).
-
-### Requerimientos Funcionales (RF)
-* **RF1 - Ingreso estructurado:** El sistema debe permitir al Ciudadano ingresar reclamos mediante formularios electrónicos.
-* **RF2 - Asignación de identificador único:** El sistema debe generar y asignar automáticamente un número de ingreso único a cada solicitud para permitir su seguimiento.
-* **RF3 - Trazabilidad y cambio de estados:** El sistema debe permitir al Funcionario OIRS cambiar el estado de la solicitud (Ej: Ingresado, Derivado, En Análisis, Resuelto) y registrar la fecha de cada cambio para control.
-* **RF4 - Derivación interna:** El sistema debe permitir al Funcionario OIRS derivar la solicitud a la unidad técnica municipal correspondiente para su informe o resolución.
-* **RF5 - Alertas de plazos de respuesta:** El sistema debe alertar visualmente al Funcionario OIRS cuando un reclamo esté cerca de cumplir el plazo máximo de 20 días corridos para emitir la respuesta.
-* **RF6 - Ampliación de plazo:** El sistema debe permitir al Funcionario OIRS registrar una prórroga justificada de hasta 10 días corridos, notificando automáticamente al Ciudadano que la respuesta está en curso.
-* **RF7 - Historial ciudadano:** El sistema debe proveer al Ciudadano un panel donde visualice el historial completo y el estado actual de todas sus presentaciones y reclamos.
-
-### Requerimientos No Funcionales (RNF)
-* **RNF1 - Rendimiento:** Las transacciones de cambio de estado en el panel del funcionario deben reflejarse en la interfaz en menos de 2 segundos para asegurar fluidez en el entorno de trabajo.
-* **RNF2 - Seguridad y Privacidad:** El sistema debe encriptar los datos personales ingresados en los formularios (RUT, teléfono, correo) garantizando el deber de secreto sobre datos provenientes de fuentes no accesibles al público.
-* **RNF3 - Usabilidad:** La interfaz debe estar diseñada bajo un enfoque "Mobile-First" para el Ciudadano, asegurando botones de gran tamaño y legibilidad alta, mientras que la vista del Funcionario OIRS debe optimizarse para escritorio (web) con alta densidad de información.
+| Campo | Detalle |
+|---|---|
+| **Proyecto** | Santo Domingo Digital — Sistema de Reclamos Municipales |
+| **Paralelo** | 2 |
+| **Integrantes** | Matías Ruiz · Joaquín Castro · Álvaro Del Pino |
+| **Repositorio Frontend** | https://github.com/xMrMaty/reclamos-muni |
+| **Demo Frontend (Vercel)** | https://reclamos-muni.vercel.app |
 
 ---
 
-## EP 1.2: Justificación del problema y análisis del usuario objetivo
+## 2. Descripción de la Entrega
 
-### Justificación
-El problema central radica en la pérdida de trazabilidad y la falta de comunicación proactiva. Cuando un ciudadano ingresa un reclamo, la normativa exige una respuesta en un plazo máximo de 20 días corridos, con una extensión posible de 10 días. La frustración ciudadana no siempre nace de la falta de solución, sino de la "caja negra" institucional: el vecino no sabe si su requerimiento fue leído, si está siendo evaluado por una unidad técnica, o si fue olvidado. Digitalizar y transparentar el estado del trámite mitiga esta incertidumbre.
-
-### Análisis del Usuario Objetivo
-**Ciudadano:** Posee distintos niveles de alfabetización digital. Necesita interfaces limpias, procesos guiados paso a paso y lenguaje sin tecnicismos legales. Su necesidad principal es saber *"en qué está mi problema"*.
-**Funcionario OIRS (Admin):** Maneja un alto volumen de requerimientos diarios. Necesita eficiencia, visualización rápida de cuellos de botella (requerimientos por vencer) y herramientas ágiles para derivar tareas a otras unidades municipales.
+Esta entrega implementa el **backend completo** con API REST en Node.js + Express, conectado a una base de datos PostgreSQL, con autenticación JWT por roles (ciudadano / admin), y la integración con el frontend Ionic + React.
 
 ---
 
-## EP 1.3: Bocetos de UI/UX (Figma)
+## 3. Tecnologías Utilizadas
 
-El detalle completo de las interfaces y pantallas diseñadas para este proyecto se encuentra en los siguientes enlaces:
-* [Prototipo Interactivo en Figma](https://www.figma.com/site/pVRB6Pgecmp1NI24buVUMO/Sin-t%C3%ADtulo?node-id=0-1&t=2b5F6gvnvTXaL0Zb-1) (Haz clic para navegar la aplicación)
-* [Galería de Mockups Estáticos](./Mockups/) (Explora las capturas de pantalla en el repositorio)
----
+### Backend
+- **Node.js** + **Express.js** — Servidor API REST
+- **PostgreSQL** — Base de datos relacional
+- **JWT (jsonwebtoken)** — Autenticación por tokens
+- **bcryptjs** — Hash seguro de contraseñas
+- **express-validator** — Validación de inputs
+- **cors** — Control de acceso entre dominios
 
-## EP 1.4: Arquitectura de Navegación y Experiencia del Usuario
-
-La arquitectura debe ser coherente y separar estrictamente los accesos según el rol.
-
-| Rol | Rutas Principales | Flujo de Tareas Clave (Task Flow) | Componentes de Navegación |
-| :--- | :--- | :--- | :--- |
-| **Público** | `/login`, `/register` | Completar registro ➔ Validar RUT ➔ Iniciar sesión | Pantallas completas sin menús de sesión |
-| **Ciudadano** | `/home`, `/nuevo-reclamo`, `/mis-reclamos/:id` | Home ➔ Tocar "Nuevo" ➔ Llenar Formulario ➔ Confirmación ➔ Ver historial | Barra de navegación inferior (`IonTabs`) |
-| **Admin** | `/admin/dashboard`, `/admin/reclamo/:id` | Dashboard web ➔ Filtrar "Por vencer" ➔ Entrar al detalle ➔ Cambiar estado | Menú lateral persistente (`IonMenu`) |
-
-> **Justificación técnica:** Esta estructura de rutas jerárquicas con React Router protege los endpoints mediante un contexto de autenticación. Utilizar `IonTabs` para móvil mejora la ergonomía del pulgar para el ciudadano, mientras que un `IonMenu` lateral para el administrador en web maximiza el uso de la pantalla horizontal para tablas de datos complejas.
+### Frontend
+- **Ionic + React + TypeScript**
+- **Axios** — Cliente HTTP con interceptores JWT
+- **React Router** — Navegación y rutas protegidas
 
 ---
 
-## Ejecución Local
+## 5. Modelo Relacional de la Base de Datos
 
-Para levantar el entorno de desarrollo local:
+```
+usuarios (id, nombre, rut, correo, region, comuna, password_hash, rol, activo, creado_en)
+    │
+    ├──< reclamos (id, numero_folio, titulo, descripcion, direccion, estado, prioridad,
+    │              usuario_id FK, categoria_id FK, admin_id FK, unidad_tecnica,
+    │              fecha_ingreso, fecha_actualizacion, fecha_resolucion, dias_plazo)
+    │         │
+    │         └──< comentarios_reclamo (id, reclamo_id FK, usuario_id FK,
+    │                                   comentario, es_interno, creado_en)
+    │
+categorias (id, nombre, descripcion, activa)
+```
+
+---
+
+## 6. Endpoints de la API
+
+### 🔐 Autenticación
+
+| Método | Endpoint | Descripción | Acceso |
+|---|---|---|---|
+| POST | `/api/auth/registro` | Registrar nuevo ciudadano | Público |
+| POST | `/api/auth/login` | Iniciar sesión | Público |
+| GET | `/api/auth/perfil` | Obtener perfil del usuario | Privado |
+
+### 📋 Reclamos
+
+| Método | Endpoint | Descripción | Acceso |
+|---|---|---|---|
+| GET | `/api/reclamos` | Listar reclamos (admin: todos, ciudadano: los suyos) | Privado |
+| GET | `/api/reclamos/stats` | Estadísticas del dashboard | Admin |
+| GET | `/api/reclamos/:id` | Detalle de un reclamo | Privado |
+| POST | `/api/reclamos` | Crear nuevo reclamo | Ciudadano |
+| PUT | `/api/reclamos/:id` | Actualizar estado/datos | Admin |
+| DELETE | `/api/reclamos/:id` | Eliminar reclamo | Admin |
+| POST | `/api/reclamos/:id/comentarios` | Agregar comentario | Privado |
+
+### 🏷️ Categorías
+
+| Método | Endpoint | Descripción | Acceso |
+|---|---|---|---|
+| GET | `/api/categorias` | Listar categorías activas | Público |
+| POST | `/api/categorias` | Crear nueva categoría | Admin |
+| DELETE | `/api/categorias/:id` | Desactivar categoría | Admin |
+
+---
+
+## 7. Instalación y Ejecución
+
+### Requisitos previos
+- Node.js >= 18
+- PostgreSQL >= 14 instalado y corriendo
+- npm
+
+### Paso 1 — Clonar el repositorio
 ```bash
+git clone https://github.com/xMrMaty/reclamos-muni.git
+cd reclamos-muni
+```
+
+### Paso 2 — Configurar el backend
+
+```bash
+cd backend
 npm install
-ionic serve
+```
+
+Copiar el archivo de variables de entorno:
+```bash
+cp .env.example .env
+```
+
+Editar `.env` con tus credenciales de PostgreSQL:
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=reclamos_muni
+DB_USER=postgres
+DB_PASSWORD=TU_PASSWORD
+JWT_SECRET=santo_domingo_digital_secret_key_2024
+```
+
+### Paso 3 — Crear la base de datos
+
+En PostgreSQL (psql o pgAdmin):
+```sql
+CREATE DATABASE reclamos_muni;
+```
+
+Luego ejecutar el schema:
+```bash
+psql -U postgres -d reclamos_muni -f src/config/schema.sql
+```
+
+### Paso 4 — Iniciar el backend
+```bash
+npm run dev
+```
+El servidor quedará disponible en `http://localhost:3001`
+
+Verificar que funciona: `http://localhost:3001/api/health`
+
+### Paso 5 — Configurar y ejecutar el frontend
+
+```bash
+cd ../  # volver a la raíz del proyecto
+npm install
+npm run dev
+```
+
+El frontend quedará disponible en `http://localhost:5173`
+
+### Credenciales de prueba
+| Rol | RUT | Contraseña |
+|---|---|---|
+| Admin | `11.111.111-1` | `Admin1234!` |
+| Ciudadano | Registrarse en `/registro` | La que elijas |
+*(Usar la clave "contrasena" en el body del JSON)*
+
+---
+
+## 8. Pruebas con Postman
+
+1. Abrir Postman
+2. Importar el archivo `otros/SantoDomingo_API.postman_collection.json`
+3. Ejecutar primero **"Login administrador"** o **"Registro de ciudadano"** — el token se guarda automáticamente como variable de colección
+4. Ejecutar los demás endpoints en orden
+
+---
+
+## 9. Seguridad implementada (EP 2.6)
+
+- ✅ Hash de contraseñas con **bcryptjs** (salt rounds: 10)
+- ✅ Autenticación con **JWT** (expiración configurable)
+- ✅ Validación de inputs con **express-validator** (RUT, email, longitudes)
+- ✅ Consultas con **parámetros preparados** en PostgreSQL (prevención de SQL Injection)
+- ✅ **CORS** configurado solo para orígenes permitidos
+- ✅ Diferenciación de roles (**ciudadano / admin**) en cada endpoint
