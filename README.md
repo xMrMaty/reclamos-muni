@@ -163,12 +163,31 @@ El frontend quedará disponible en `http://localhost:5173`
 
 ---
 
-## 8. Pruebas con Postman
+## 8. Pruebas Funcionales con Postman (Evidencias)
 
-1. Abrir Postman
-2. Importar el archivo `otros/SantoDomingo_API.postman_collection.json`
-3. Ejecutar primero **"Login administrador"** o **"Registro de ciudadano"** — el token se guarda automáticamente como variable de colección
-4. Ejecutar los demás endpoints en orden
+1. Abrir Postman e importar el archivo `SantoDomingo_API.postman_collection.json`.
+2. Ejecutar primero **"Login administrador"** para obtener el token de acceso. El JSON del body espera el campo `"contrasena"` para validar las credenciales con hash Bcrypt.
+
+### 📸 Capturas de Respaldo
+
+A continuación se adjuntan las evidencias de las pruebas funcionales obligatorias corriendo localmente de forma exitosa:
+
+#### A. Autenticación Exitosa (Login Administrador - 200 OK)
+Se valida el descifrado del hash de la contraseña mediante Bcrypt y la correcta generación del token JWT.
+* [Ver imagen en alta resolución](evidencia_login.png)
+
+![Evidencia Login](evidencia_login.png)
+
+#### B. Creación de Reclamo (201 Created)
+Se evidencia la persistencia del reclamo en PostgreSQL vinculando correctamente el `usuario_id` obtenido del token y el `numero_folio` obligatorio exigido por la base de datos.
+* [Ver imagen en alta resolución](evidencia_reclamo.png)
+
+![Evidencia Reclamo](evidencia_reclamo.png)
+
+### Credenciales de prueba integradas en Postman
+| Rol | RUT | Campo Contraseña | Valor |
+|---|---|---|---|
+| Admin | `11.111.111-1` | `contrasena` | `Admin1234!` |
 
 ---
 
