@@ -156,7 +156,7 @@ El frontend quedará disponible en `http://localhost:5173`
 ### Credenciales de prueba
 | Rol | RUT | Contraseña |
 |---|---|---|
-| Admin | `11.111.111-1` | `Admin1234!` |
+| Admin | `11111111-1` | `Admin1234!` |
 | Ciudadano | Registrarse en `/registro` | La que elijas |
 *(Usar la clave "contrasena" en el body del JSON)*
 
@@ -186,7 +186,7 @@ Se evidencia la persistencia del reclamo en PostgreSQL vinculando correctamente 
 ### Credenciales de prueba integradas en Postman
 | Rol | RUT | Campo Contraseña | Valor |
 |---|---|---|---|
-| Admin | `11.111.111-1` | `contrasena` | `Admin1234!` |
+| Admin | `11111111-1` | `contrasena` | `Admin1234!` |
 
 ---
 
