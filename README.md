@@ -11,7 +11,7 @@
 | **Proyecto** | Santo Domingo Digital — Sistema de Reclamos Municipales |
 | **Paralelo** | 2 |
 | **Integrantes** | Matías Ruiz · Joaquín Castro · Álvaro Del Pino |
-| **Repositorio Frontend** | https://github.com/xMrMaty/reclamos-muni |
+| **Repositorio** | https://github.com/xMrMaty/reclamos-muni |
 | **Demo Frontend (Vercel)** | https://reclamos-muni.vercel.app |
 
 ---
