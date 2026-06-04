@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "Santo Domingo Digital - API REST",
+    "description": "Colección de endpoints para el proyecto Santo Domingo Digital. Entrega Parcial 2 - Ingeniería Web y Móvil.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3001/api" },
+    { "key": "token_ciudadano", "value": "" },
+    { "key": "token_admin", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Registro de ciudadano",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/registro",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Pérez García\",\n  \"rut\": \"12.345.678-9\",\n  \"correo\": \"juan.perez@test.com\",\n  \"region\": \"Región de O'Higgins\",\n  \"comuna\": \"Santo Domingo\",\n  \"password\": \"Pass1234!\"\n}"
+            }
+          },
+          "response": [],
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 201) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('token_ciudadano', data.token);",
+                "  console.log('Token ciudadano guardado:', data.token);",
+                "}"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Login ciudadano",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"12.345.678-9\",\n  \"password\": \"Pass1234!\"\n}"
+            }
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('token_ciudadano', data.token);",
+                "}"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Login administrador",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rut\": \"11.111.111-1\",\n  \"password\": \"Admin1234!\"\n}"
+            }
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "if (pm.response.code === 200) {",
+                "  const data = pm.response.json();",
+                "  pm.collectionVariables.set('token_admin', data.token);",
+                "}"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Obtener perfil (token requerido)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/auth/perfil",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_ciudadano}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 Reclamos",
+      "item": [
+        {
+          "name": "Listar mis reclamos (ciudadano)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/reclamos",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_ciudadano}}" }]
+          }
+        },
+        {
+          "name": "Listar todos los reclamos (admin)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/reclamos?estado=nuevo&page=1&limit=10", "query": [
+              { "key": "estado", "value": "nuevo" },
+              { "key": "page", "value": "1" },
+              { "key": "limit", "value": "10" }
+            ]},
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }]
+          }
+        },
+        {
+          "name": "Obtener reclamo por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/reclamos/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_ciudadano}}" }]
+          }
+        },
+        {
+          "name": "Crear nuevo reclamo (ciudadano)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/reclamos",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_ciudadano}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Bache peligroso en Av. Principal\",\n  \"descripcion\": \"Existe un bache muy profundo que ha causado daños a varios vehículos durante la última semana.\",\n  \"direccion\": \"Av. Principal con Calle Los Pinos\",\n  \"categoria_id\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar estado reclamo (admin)",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/reclamos/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_admin}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"en_proceso\",\n  \"prioridad\": \"alta\",\n  \"unidad_tecnica\": \"Vialidad\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar reclamo (admin)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/reclamos/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }]
+          }
+        },
+        {
+          "name": "Agregar comentario a reclamo",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/reclamos/1/comentarios",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_admin}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comentario\": \"El reclamo fue derivado a la unidad de Vialidad para su resolución.\",\n  \"es_interno\": false\n}"
+            }
+          }
+        },
+        {
+          "name": "Estadísticas dashboard (admin)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/reclamos/stats",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏷️ Categorías",
+      "item": [
+        {
+          "name": "Listar categorías (público)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/categorias"
+          }
+        },
+        {
+          "name": "Crear categoría (admin)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/categorias",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_admin}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pavimentación\",\n  \"descripcion\": \"Problemas relacionados con el pavimento de calles\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar categoría (admin)",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/categorias/7",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token_admin}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏥 Health Check",
+      "item": [
+        {
+          "name": "Estado del servidor",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/health"
+          }
+        }
+      ]
+    }
+  ]
+}
