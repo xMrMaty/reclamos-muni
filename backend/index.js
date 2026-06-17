@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet'); 
-const xss = require('xss-clean');
+//const xss = require('xss-clean');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet());
 
 // 2. Limpia los datos de entrada en req.body, req.query y req.params para prevenir inyecciones Cross-Site Scripting (XSS)
-app.use(xss());
+//app.use(xss());
 
 // =============================================
 // MIDDLEWARES GLOBALES
@@ -32,16 +32,9 @@ const origenesPermitidos = [
   'https://reclamos-muni.vercel.app'
 ];
 
+// CORS - permite peticiones desde el frontend
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    
-    if (origenesPermitidos.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Acceso denegado por políticas de CORS de Santo Domingo Digital'));
-    }
-  },
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:8080', 'https://reclamos-muni.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: muni_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123 # Asegúrate de que coincida con tu .env
+      POSTGRES_DB: reclamos_muni
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: muni_backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_USER=postgres
+      - DB_HOST=db # Ahora apunta al contenedor de la BD
+      - DB_NAME=reclamos_muni
+      - DB_PASSWORD=admin123
+      - DB_PORT=5432
+      - JWT_SECRET=super_secreto_123
+      - EMAIL_USER=tu_correo@gmail.com # (Opcional, pon el de tu .env)
+      - EMAIL_PASS=tu_password_app   # (Opcional, pon el de tu .env)
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: muni_frontend
+    ports:
+      - "8080:80" # Tu frontend estará disponible en http://localhost:8080
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
