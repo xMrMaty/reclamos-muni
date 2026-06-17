@@ -11,24 +11,52 @@ const pool = new Pool({
   port: process.env.DB_PORT || 5432,
 });
 
-// 1. Obtener todos los reclamos con el nombre de su categoría (CORREGIDO: fecha_ingreso)
+// =========================================================================
+// 1. Obtener todos los reclamos con PAGINACIÓN OPTIMIZADA
+// =========================================================================
 router.get('/', async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
+
   try {
-    const consulta = `
+    const consultaData = `
       SELECT r.*, c.nombre AS categoria_nombre 
       FROM reclamos r
       LEFT JOIN categorias c ON r.categoria_id = c.id
       ORDER BY r.fecha_ingreso DESC
+      LIMIT $1 OFFSET $2
     `;
-    const resultado = await pool.query(consulta);
-    res.json(resultado.rows);
+    
+    const consultaConteo = 'SELECT COUNT(*) FROM reclamos;';
+
+    const [resultadoData, resultadoConteo] = await Promise.all([
+      pool.query(consultaData, [limit, offset]),
+      pool.query(consultaConteo)
+    ]);
+
+    const totalReclamos = parseInt(resultadoConteo.rows[0].count);
+    const totalPaginas = Math.ceil(totalReclamos / limit);
+
+    res.json({
+      ok: true,
+      data: resultadoData.rows,
+      paginacion: {
+        totalItems: totalReclamos,
+        totalPaginas: totalPaginas,
+        paginaActual: page,
+        limitePorPagina: limit
+      }
+    });
   } catch (error) {
-    console.error('Error al obtener reclamos:', error);
-    res.status(500).json({ error: 'Error al cargar los reclamos.' });
+    console.error('Error al obtener reclamos con optimización:', error);
+    res.status(500).json({ error: 'Error al cargar los reclamos de forma eficiente.' });
   }
 });
 
-// 2. Insertar un nuevo reclamo (CORREGIDO: RETURNING *)
+// =========================================================================
+// 2. Insertar un nuevo reclamo
+// =========================================================================
 router.post('/', async (req, res) => {
   const { numero_folio, titulo, descripcion, direccion, categoria_id, usuario_id } = req.body;
   try {
@@ -51,7 +79,9 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 3. Actualizar el estado de un reclamo y ENVIAR NOTIFICACIÓN (Puntos EF 1 y EF 5)
+// =========================================================================
+// 3. Actualizar el estado de un reclamo y ENVIAR NOTIFICACIÓN 
+// =========================================================================
 router.put('/:id/estado', async (req, res) => {
   const { id } = req.params;
   const { estado } = req.body;
@@ -70,12 +100,10 @@ router.put('/:id/estado', async (req, res) => {
 
     const reclamoActualizado = resultado.rows[0];
 
-    // Buscar el correo del ciudadano dueño del reclamo
     const usuarioQuery = await pool.query('SELECT correo FROM usuarios WHERE id = $1', [reclamoActualizado.usuario_id]);
     
     if (usuarioQuery.rows.length > 0) {
       const correoUsuario = usuarioQuery.rows[0].correo;
-      // Disparar el correo de forma asíncrona
       enviarNotificacionEstado(correoUsuario, reclamoActualizado.numero_folio, estado);
     }
     
@@ -86,7 +114,9 @@ router.put('/:id/estado', async (req, res) => {
   }
 });
 
+// =========================================================================
 // 4. NUEVO: Eliminar un reclamo (Delete)
+// =========================================================================
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {

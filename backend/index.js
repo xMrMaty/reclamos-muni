@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet'); 
+const xss = require('xss-clean');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -10,12 +12,36 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // =============================================
+// MIDDLEWARES DE SEGURIDAD AVANZADA
+// =============================================
+
+// 1. Configura cabeceras HTTP seguras para mitigar vulnerabilidades web conocidas
+app.use(helmet());
+
+// 2. Limpia los datos de entrada en req.body, req.query y req.params para prevenir inyecciones Cross-Site Scripting (XSS)
+app.use(xss());
+
+// =============================================
 // MIDDLEWARES GLOBALES
 // =============================================
 
-// CORS - permite peticiones desde el frontend
+// CORS - permite peticiones controladas desde tus entornos de desarrollo y producción
+const origenesPermitidos = [
+  'http://localhost:5173', 
+  'http://localhost:3000', 
+  'https://reclamos-muni.vercel.app'
+];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://reclamos-muni.vercel.app'],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    if (origenesPermitidos.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Acceso denegado por políticas de CORS de Santo Domingo Digital'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -36,7 +62,7 @@ app.use('/api/categorias', categoriasRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     estado: 'OK',
-    mensaje: 'Servidor Santo Domingo Digital funcionando correctamente.',
+    mensaje: 'Servidor Santo Domingo Digital funcionando correctamente con seguridad avanzada aplicada.',
     timestamp: new Date().toISOString()
   });
 });
@@ -56,7 +82,7 @@ app.use((err, req, res, next) => {
 // INICIAR SERVIDOR
 // =============================================
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor seguro corriendo en http://localhost:${PORT}`);
   console.log(`📋 API disponible en http://localhost:${PORT}/api`);
 });
 
